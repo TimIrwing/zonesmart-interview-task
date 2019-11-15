@@ -4,6 +4,7 @@ module.exports = {
     'plugin:vue/base',
   ],
   rules: {
+    'import/no-unresolved': 'off',
     'vue/html-closing-bracket-newline': ['error', {
       'singleline': 'never',
       'multiline': 'never'
