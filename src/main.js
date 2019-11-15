@@ -1,8 +1,21 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from 'vue';
+import Login from './components/Login.vue';
+import NotFound from './components/NotFound.vue';
 
-Vue.config.productionTip = false
+const routes = {
+  '/': Login,
+};
 
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
+// eslint-disable-next-line
+const app = new Vue({
+  el: '#app',
+  data: {
+    currentRoute: window.location.pathname,
+  },
+  computed: {
+    ViewComponent() {
+      return routes[this.currentRoute] || NotFound;
+    },
+  },
+  render(h) { return h(this.ViewComponent); },
+});
