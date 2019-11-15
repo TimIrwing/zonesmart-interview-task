@@ -17,7 +17,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(-30deg, #3b41c5 0%, #a981bb 49%, #ffc8a9 100%);
+    background: linear-gradient(120deg, #4b6cb7, #182848);
   }
 
 </style>
