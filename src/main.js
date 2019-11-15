@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import Login from '@/components/Login.vue';
-import NotFound from '@/components/NotFound.vue';
+import Login from '@/views/Login.vue';
+import NotFound from '@/views/NotFound.vue';
 
 const routes = {
   '/': Login,
