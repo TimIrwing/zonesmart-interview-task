@@ -1,12 +1,15 @@
 <template>
-  <div>
+  <Container>
     <h1>This page is missing</h1>
-  </div>
+  </Container>
 </template>
 
 <script>
+import Container from '@/components/Container';
+
 export default {
   name: 'NotFound',
+  components: { Container },
 };
 </script>
 
