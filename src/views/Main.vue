@@ -23,7 +23,7 @@
 <script>
 import Container from '@/components/Container';
 import Loading from '@/components/Loading';
-import { getJSON, refreshToken } from '@/helpers';
+import { getChannels } from '@/APIService';
 
 export default {
   name: 'Main',
@@ -35,15 +35,13 @@ export default {
   }),
   async created() {
     this.loading = true;
-    await refreshToken();
-    const res = await getJSON('http://utss.su/api/user_channel/', {
-      method: 'GET',
-      headers: {
-        Authorization: `JWT ${window.localStorage.getItem('access')}`,
-      },
-    });
 
-    this.channels = res.results;
+    try {
+      this.channels = await getChannels();
+    } catch (e) {
+      window.location.href = '/';
+    }
+
     this.loading = false;
   },
 };

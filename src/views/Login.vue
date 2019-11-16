@@ -51,12 +51,11 @@ export default {
     async auth() {
       this.loading = true;
 
-      const { error } = await setToken(this.email, this.password);
-
-      if (error) {
-        this.error = error;
-      } else {
+      try {
+        await setToken(this.email, this.password);
         window.location.href = '/main';
+      } catch (error) {
+        this.error = error.message;
       }
 
       this.loading = false;
