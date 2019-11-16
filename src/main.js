@@ -11,6 +11,8 @@ Vue.use(MdButton);
 Vue.use(MdField);
 Vue.use(MdProgress);
 
+Vue.config.productionTip = false;
+
 const routes = {
   '/': Login,
   '/main': Main,
