@@ -1,25 +1,30 @@
 <template>
   <Container>
-    <form @submit.prevent="auth" class="form">
-      <h1 class="title">Login</h1>
+    <form @submit.prevent="auth">
+      <MdCard class="card">
+        <MdCardHeader>
+          <div class="md-title"> Login</div>
+          <div class="md-subhead error" v-if="error">No such user exist</div>
+        </MdCardHeader>
 
-      <transition name="fade">
-        <p class="error" v-if="error">
-          No such user exist
-        </p>
-      </transition>
+        <MdCardContent>
 
-      <md-field>
-        <label>E-mail</label>
-        <md-input v-model="email" type="email" required/>
-      </md-field>
 
-      <md-field>
-        <label>Password</label>
-        <md-input v-model="password" type="password" required/>
-      </md-field>
+          <md-field>
+            <label>E-mail</label>
+            <md-input v-model="email" type="email" required/>
+          </md-field>
 
-      <MdButton type="submit" class="md-raised md-primary">Proceed</MdButton>
+          <md-field>
+            <label>Password</label>
+            <md-input v-model="password" type="password" required/>
+          </md-field>
+        </MdCardContent>
+
+        <MdCardActions>
+          <MdButton type="submit" class="md-primary">Proceed</MdButton>
+        </MdCardActions>
+      </MdCard>
     </form>
 
     <transition name="fade">
@@ -71,27 +76,10 @@ export default {
 </script>
 
 <style scoped>
-  .form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-width: 25em;
-    padding: 2em;
-    border-radius: 1em;
-    background-color: #fefefe;
-    box-shadow: 2px 4px 1px rgba(0, 0, 0, .2);
+  .card {
+    min-width: 20vw;
   }
-
-  .title {
-    color: #222;
-  }
-
   .error {
-    padding: 1em;
-    border: 1px solid #FE2400;
-    border-radius: 4px;
-    font-size: 1.2em;
     color: #FE2400;
   }
 
