@@ -8,8 +8,6 @@
         </MdCardHeader>
 
         <MdCardContent>
-
-
           <md-field>
             <label>E-mail</label>
             <md-input v-model="email" type="email" required/>
