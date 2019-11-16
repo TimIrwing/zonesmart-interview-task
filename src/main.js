@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { MdButton, MdField, MdProgress } from 'vue-material/dist/components';
 import Login from '@/views/Login.vue';
+import Main from '@/views/Main.vue';
 import NotFound from '@/views/NotFound.vue';
 
 import 'vue-material/dist/vue-material.min.css';
@@ -12,6 +13,7 @@ Vue.use(MdProgress);
 
 const routes = {
   '/': Login,
+  '/main': Main,
 };
 
 // eslint-disable-next-line
