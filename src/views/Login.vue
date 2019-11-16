@@ -31,6 +31,7 @@
 <script>
 import Container from '@/components/Container';
 import Loading from '@/components/Loading';
+import { getJSON } from '@/helpers';
 
 export default {
   name: 'Login',
@@ -45,25 +46,18 @@ export default {
     async auth() {
       this.loading = true;
 
-      const response = await fetch('http://utss.su/api/auth/jwt/create/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const { refresh, access } = await getJSON('http://utss.su/api/auth/jwt/create/', {
         body: JSON.stringify({
           email: this.email,
           password: this.password,
         }),
       });
 
-      if (response.ok) {
-        const json = await response.json();
-
+      if (access) {
         const storage = window.localStorage;
 
-        Object.keys(json).forEach((key) => {
-          storage.setItem(key, json[key]);
-        });
+        storage.setItem('access', access);
+        storage.setItem('refresh', refresh);
 
         window.location.href = '/main';
       } else {
