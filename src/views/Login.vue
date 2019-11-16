@@ -4,7 +4,7 @@
       <MdCard class="card">
         <MdCardHeader>
           <div class="md-title"> Login</div>
-          <div class="md-subhead error" v-if="error">No such user exist</div>
+          <div class="md-subhead error" v-if="error">{{ error }}</div>
         </MdCardHeader>
 
         <MdCardContent>
@@ -36,7 +36,7 @@
 <script>
 import Container from '@/components/Container';
 import Loading from '@/components/Loading';
-import { getJSON } from '@/helpers';
+import { setToken } from '@/APIService';
 
 export default {
   name: 'Login',
@@ -51,22 +51,12 @@ export default {
     async auth() {
       this.loading = true;
 
-      const { refresh, access } = await getJSON('http://utss.su/api/auth/jwt/create/', {
-        body: JSON.stringify({
-          email: this.email,
-          password: this.password,
-        }),
-      });
+      const { error } = await setToken(this.email, this.password);
 
-      if (access) {
-        const storage = window.localStorage;
-
-        storage.setItem('access', access);
-        storage.setItem('refresh', refresh);
-
-        window.location.href = '/main';
+      if (error) {
+        this.error = error;
       } else {
-        this.error = true;
+        window.location.href = '/main';
       }
 
       this.loading = false;
