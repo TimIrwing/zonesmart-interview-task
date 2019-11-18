@@ -131,3 +131,9 @@ export async function getCategoryList(options) {
   // sort alphabetically
   return res.sort((a, b) => (a.name > b.name ? 1 : -1));
 }
+
+export async function getAspects(id) {
+  await refreshToken();
+
+  return getListArray({}, `${CATEGORY_PATH}${id}/aspect/`);
+}
