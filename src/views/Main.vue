@@ -21,6 +21,8 @@
               <CategoryCol :col="col" @click="colClick"/>
             </li>
           </ul>
+
+          <AspectList v-if="aspects" :aspects="aspects"/>
         </MdCardContent>
       </MdCard>
     </form>
@@ -32,16 +34,20 @@
 import Container from '@/components/Container';
 import Loading from '@/components/Loading';
 import CategoryCol from '@/components/CategoryCol';
-import { getCategoryList, getChannels } from '@/APIService';
+import AspectList from '@/components/AspectList';
+import { getCategoryList, getChannels, getAspects } from '@/APIService';
 
 export default {
   name: 'Main',
-  components: { CategoryCol, Loading, Container },
+  components: {
+    CategoryCol, Loading, Container, AspectList,
+  },
   data: () => ({
     channels: null,
     loading: null,
     channelID: null,
     categories: [],
+    aspects: null,
   }),
   async created() {
     this.loading = true;
@@ -58,9 +64,8 @@ export default {
     async showCategories(options) {
       this.loading = true;
 
-      this.removeCategories(options.level);
+      this.removeCategories(options.level - 1);
       const list = await getCategoryList(options);
-
 
       if (list.length > 0) this.categories.push(list);
 
@@ -68,19 +73,27 @@ export default {
     },
 
     removeCategories(start) {
-      this.categories.length = start - 1;
+      this.aspects = null;
+      this.categories.length = start;
     },
 
-    colClick(obj) {
+    async colClick(obj) {
       const options = {
         channel_id: this.channelID,
         level: obj.level,
         parent_id: obj.category_id,
       };
 
-      options.level += 1;
+      if (obj.is_leaf) {
+        this.loading = true;
+        this.removeCategories(options.level);
+        this.aspects = await getAspects(obj.id);
+        this.loading = false;
+      } else {
+        options.level += 1;
 
-      this.showCategories(options);
+        this.showCategories(options);
+      }
     },
   },
 };
@@ -96,6 +109,7 @@ export default {
 
   .categoriesContainer {
     display: flex;
+    justify-content: center;
     padding: 0;
     margin: 0;
     list-style: none;
