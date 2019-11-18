@@ -50,7 +50,7 @@ function encodeParams(obj) {
   ).join('&');
 }
 
-async function getListArray(options) {
+async function getListArray(options, path) {
   const STEP = 100;
   const params = {
     limit: STEP,
@@ -62,7 +62,7 @@ async function getListArray(options) {
   let response;
   do {
     //  eslint-disable-next-line no-await-in-loop
-    response = await getJSON(`${CATEGORY_PATH}?${encodeParams(params)}`, {
+    response = await getJSON(`${path}?${encodeParams(params)}`, {
       method: 'GET',
       headers: {
         Authorization: `JWT ${STORAGE.getItem(ACCESS_NAME)}`,
@@ -78,8 +78,7 @@ async function getListArray(options) {
     }
   } while (response.count > params.offset);
 
-  // sort alphabetically
-  return result.sort((a, b) => (a.name > b.name ? 1 : -1));
+  return result;
 }
 
 export async function isLoggedIn() {
@@ -127,5 +126,8 @@ export async function getCategoryList(options) {
     ...options,
   };
 
-  return getListArray(params);
+  const res = await getListArray(params, CATEGORY_PATH);
+
+  // sort alphabetically
+  return res.sort((a, b) => (a.name > b.name ? 1 : -1));
 }
