@@ -2,7 +2,7 @@
   <MdList class="categoryList">
     <MdListItem v-for="obj in col"
                 :key="obj.name"
-                :class="{ notLeaf: !obj.is_leaf, selected: obj.name === selected}"
+                :class="{ notLeaf: !obj.is_leaf, selected: obj.name === selected }"
                 @click="select(obj)">
       {{obj.name}}
     </MdListItem>
@@ -38,7 +38,7 @@ export default {
   }
 
   .selected {
-    background-color: rgba(0, 0, 15, .15);
+    background-color: rgba(0, 0, 20, .10);
   }
 
   .notLeaf::after {
