@@ -78,7 +78,7 @@ async function getListArray(options) {
     }
   } while (response.count > params.offset);
 
-  return result;
+  return result.sort((a, b) => (a.name > b.name ? 1 : -1));
 }
 
 export async function setToken(email, password) {
@@ -112,9 +112,7 @@ export async function getCategoryList(options) {
   const params = {
     ...{
       level: 1,
-      parent_id: '',
-      is_leaf: '',
-      variations_supported: '',
+      parent_id: 0,
     },
     ...options,
   };
