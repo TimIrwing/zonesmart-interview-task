@@ -111,7 +111,7 @@ export default {
 
   .categoryList {
     width: 25em;
-    max-height: 752vh;
+    max-height: 75vh;
     overflow-y: auto;
   }
 
