@@ -81,6 +81,15 @@ async function getListArray(options) {
   return result.sort((a, b) => (a.name > b.name ? 1 : -1));
 }
 
+export async function isLoggedIn() {
+  try {
+    await refreshToken();
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 export async function setToken(email, password) {
   const { refresh, access, detail } = await getJSON(CREATE_PATH, {
     body: JSON.stringify({

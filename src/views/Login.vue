@@ -34,7 +34,7 @@
 <script>
 import Container from '@/components/Container';
 import Loading from '@/components/Loading';
-import { setToken } from '@/APIService';
+import { setToken, isLoggedIn } from '@/APIService';
 
 export default {
   name: 'Login',
@@ -45,6 +45,11 @@ export default {
     loading: null,
     error: null,
   }),
+  async created() {
+    this.loading = true;
+    if (await isLoggedIn()) window.location.href = '/main';
+    this.loading = false;
+  },
   methods: {
     async auth() {
       this.loading = true;
