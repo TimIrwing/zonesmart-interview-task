@@ -18,14 +18,7 @@
 
           <ul class="categoriesContainer">
             <li v-for="(col, index) in categories" :key="index">
-              <MdList class="categoryList">
-                <MdListItem v-for="obj in col"
-                            :key="obj.name"
-                            :class="{ notLeaf: !obj.is_leaf }"
-                            @click="colClick(obj)">
-                  {{obj.name}}
-                </MdListItem>
-              </MdList>
+              <CategoryCol :col="col" @click="colClick"/>
             </li>
           </ul>
         </MdCardContent>
@@ -38,11 +31,12 @@
 <script>
 import Container from '@/components/Container';
 import Loading from '@/components/Loading';
+import CategoryCol from '@/components/CategoryCol';
 import { getCategoryList, getChannels } from '@/APIService';
 
 export default {
   name: 'Main',
-  components: { Loading, Container },
+  components: { CategoryCol, Loading, Container },
   data: () => ({
     channels: null,
     loading: null,
@@ -107,19 +101,5 @@ export default {
     list-style: none;
     max-width: 100%;
     overflow-x: auto;
-  }
-
-  .categoryList {
-    width: 25em;
-    max-height: 75vh;
-    overflow-y: auto;
-  }
-
-  .notLeaf::after {
-    content: '>';
-    position: absolute;
-    top: 50%; right: .5em;
-    font-size: 1.5em;
-    transform: translateY(-50%);
   }
 </style>
