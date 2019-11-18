@@ -1,6 +1,6 @@
 <template>
   <Container>
-    <form>
+    <form class="form">
       <MdCard class="card">
         <MdCardContent>
           <MdField>
@@ -93,6 +93,9 @@ export default {
 </script>
 
 <style scoped>
+  .form {
+    max-width: 100%;
+  }
   .card {
     min-width: 40em;
   }
@@ -102,11 +105,13 @@ export default {
     padding: 0;
     margin: 0;
     list-style: none;
+    max-width: 100%;
+    overflow-x: auto;
   }
 
   .categoryList {
-    width: 20em;
-    max-height: 80vh;
+    width: 25em;
+    max-height: 752vh;
     overflow-y: auto;
   }
 
