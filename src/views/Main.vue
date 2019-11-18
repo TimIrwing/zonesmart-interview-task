@@ -26,7 +26,10 @@
         </MdCardContent>
       </MdCard>
     </form>
-    <Loading v-if="loading"/>
+
+    <transition name="fade">
+      <Loading v-if="loading"/>
+    </transition>
   </Container>
 </template>
 
@@ -115,5 +118,15 @@ export default {
     list-style: none;
     max-width: 100%;
     overflow-x: auto;
+  }
+
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 0;
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity .5s;
   }
 </style>

@@ -75,7 +75,6 @@ export default {
     color: #FE2400;
   }
 
-
   .fade-enter,
   .fade-leave-to {
     opacity: 0;
@@ -83,7 +82,6 @@ export default {
 
   .fade-enter-active,
   .fade-leave-active {
-    transition-delay: .25s;
     transition: opacity .5s;
   }
 </style>
