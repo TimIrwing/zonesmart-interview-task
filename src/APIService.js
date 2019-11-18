@@ -78,6 +78,7 @@ async function getListArray(options) {
     }
   } while (response.count > params.offset);
 
+  // sort alphabetically
   return result.sort((a, b) => (a.name > b.name ? 1 : -1));
 }
 
